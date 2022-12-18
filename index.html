@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src= "/index.js"></script>
+</head>
+<body>
+  
+<div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Instructions</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Réalisation</label>
+		<div class="login-form">
+			<div class="sign-in-htm">
+				<div class="group">
+					<label for="xxxx" class="label">xxxxx:</label>
+					<input id="xxxx" type="text" class="input">
+				</div>
+				<div class="group">
+					<label for="yyyy" class="label">yyyy</label>
+					<input id="yyyyy" type="Barcode2" class="input" data-type="Barcode2">
+				</div>
+				<div class="group">
+					<input id="check" type="checkbox" class="check" checked>
+					<label for="check"><span class="icon"></span> Keep me Signed in</label>
+				</div>
+				<div class="group">
+					<input type="submit" class="button" value="Sign In">
+				</div>
+				<div class="hr"></div>
+				<div class="foot-lnk">
+					<a href="#forgot">Forgot Barcode2?</a>
+				</div>
+			</div>
+			<div class="sign-up-htm">
+				<form novalidate id="myForm">
+					<div class="dws-input">
+					  <div class="group">
+						<label for="Barcode1" class="label">Barcode 1 :</label>
+						<input id="Barcode1" type="text" class="input" novalidate>
+					  </div>
+					  <div class="group">
+						<label for="Barcode2" class="label">Barcode 2 :</label>
+						<input id="Barcode2" type="text" class="input" data-type="Barcode2" novalidate>
+					  </div>
+					  <div class="group">
+						<label for="Barcode3" class="label">Barcode 3 :</label>
+						<input id="Barcode3" type="text" class="input" data-type="Barcode3" novalidate>
+					  </div>
+					  <div class="group">
+						<label for="Poids" class="label">Poids :</label>
+						<input id="Barcode4" type="number" class="input" novalidate>
+					  </div>
+					</div>
+				  </form>
+				  
+				  <script>
+					const inputs = document.querySelectorAll('.input');
+
+					for (let i = 0; i < inputs.length; i++) {
+					inputs[i].addEventListener('keydown', (event) => {
+						if (event.key === 'Enter') {
+						// Check elements before current element
+						for (let j = i - 1; j >= 0; j--) {
+							if (inputs[j].value === '') {
+							inputs[j].focus();
+							break;
+							}
+						}
+
+						// Check elements after current element
+						for (let j = i + 1; j < inputs.length; j++) {
+							if (inputs[j].value === '') {
+							inputs[j].focus();
+							break;
+								}
+							}
+							}
+						});
+						}
+				  </script>
+				  
+			<br>
+			<br>
+
+			<div class = "barcode-container">
+				<div class="image-container">
+					<img src="Images\New measure.gif" alt="New measure">
+					<button type="buttonClear" class="btn btn-outline-info" id="btn_NewMeasure" onclick="ClearFields();inputsDisabled();">Nouvelle mesure</button>
+				</div>
+				<div class="image-container">
+					<img src="Images\TARE.gif" alt="TARE">
+					<button type="button" class="btn" id="btn_TARE" onclick="ClearFields()"> TARE</button>
+				</div>
+				  <div class="image-container">
+					<img src="Images\Sigma Collect.gif" alt="Sigma Collect">
+					<button type="button" class="btn" id="btn_SigmaCollect">Sigma Collect</button>
+				  </div>
+			</div>
+				<div class="hr"></div>
+				<div class="group">
+				<label for="ActionId" class="label">Action :</label>
+				<input id="ActionId" type="text" class="input" placeholder="Enter action:" autofocus>
+				</div>
+
+				<script>
+					const input = document.querySelector("#ActionId");
+					// Execute a function when the user presses a key on the keyboard
+					input.addEventListener('keydown', (event) => {
+					// If the user presses the "Enter" key on the keyboard
+					if (event.key === "Enter" && input.value == "TARE") {
+						// Trigger the button element with a click
+						document.getElementById("btn_TARE").click();
+					} else if (event.key === "Enter" && input.value == "New measure") {
+						// Trigger the button element with a click
+						document.getElementById("btn_NewMeasure").click();
+					} else if (event.key === "Enter" && input.value == "Sigma Collect") {
+						// Trigger the button element with a click
+						document.getElementById("btn_SigmaCollect").click();
+					}
+					});
+					
+					function inputsDisabled() {
+						// Récupération de tous les éléments de type input
+						const inputs = document.querySelectorAll("input");
+
+						// Parcours de chaque élément
+						inputs.forEach(input => {
+							// Effacement de la valeur de l'élément
+							input.value = "";
+
+							// Activation de l'élément
+							input.disabled = true;
+
+							// Modification du style du curseur
+							input.style.cursor = "not-allowed";
+						});
+						}
+
+
+						function ClearFields() {
+						// Récupération de tous les éléments de type input
+						const inputs = document.querySelectorAll("input");
+
+						// Parcours de chaque élément
+						inputs.forEach(input => {
+							// Effacement de la valeur de l'élément
+							input.value = "";
+
+							// Activation de l'élément
+							input.disabled = false;
+
+							// Modification du style du curseur
+							input.style.cursor = "auto";
+						});
+						}
+
+				
+				  </script>
+				  
+			</div>
+		</div>
+	</div>
+	
+
+</div>
+</body>
+</html>
+
